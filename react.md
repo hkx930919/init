@@ -351,7 +351,10 @@ this.setState(function(prevState, props) {
     ```
 
 -   事件传递参数
-    `<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button> <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>` > 1 箭头函数的方式，事件对象必须显式的进行传递 > 2 bind 的方式，事件对象以及更多的参数将会被隐式的进行传递。 > 3 通过 bind 方式向监听函数传参，在类组件中定义的监听函数，事件对象 e 要排在所传递参数的后面
+    `<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button> <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>` 
+    > 1 箭头函数的方式，事件对象必须显式的进行传递
+    > 2 bind 的方式，事件对象以及更多的参数将会被隐式的进行传递。 
+    > 3 通过 bind 方式向监听函数传参，在类组件中定义的监听函数，事件对象 e 要排在所传递参数的后面
 
 ## 7 条件渲染
 
@@ -399,9 +402,9 @@ this.setState(function(prevState, props) {
 
 -   组件的 key 值,当元素没有确定的 id 时，你可以使用他的序列号索引 index 作为 key
     > 如果列表可以重新排序，我们不建议使用索引来进行排序，因为这会导致渲染变得很慢
-    -   元素的 key 只有在它和它的兄弟节点对比时才有意义
-    -   元素的 key 在他的兄弟元素之间应该唯一
-        > 它们不需要是全局唯一的
+-   元素的 key 只有在它和它的兄弟节点对比时才有意义
+-   元素的 key 在他的兄弟元素之间应该唯一
+    > 它们不需要是全局唯一的
 -   在 jsx 中使用 map
 
     ```
@@ -427,26 +430,26 @@ this.setState(function(prevState, props) {
     > 在 React 中，可变的状态通常保存在组件的 state 中，并且只能用 setState() 方法进行更新.
     > React 根据初始状态渲染表单组件，接受用户后续输入，改变表单组件内部的状态。
     > 因此，将那些值由 React 控制的表单元素称为：受控组件。
-
+    
     ```
     class NameForm extends React.Component {
         constructor(props) {
             super(props);
             this.state = {value: ''};
-
+    
             this.handleChange = this.handleChange.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
         }
-
+    
         handleChange(event) {
             this.setState({value: event.target.value});
         }
-
+    
         handleSubmit(event) {
             alert('A name was submitted: ' + this.state.value);
             event.preventDefault();
         }
-
+    
         render() {
             return (
             <form onSubmit={this.handleSubmit}>
@@ -535,7 +538,7 @@ render() {
     <Greeting />,
     document.getElementById('example')
     );
-    或者使用静态属性
+    或者使用静态属性（使用 transform-class-properties 转换器）
     class Greeting extends React.Component {
         static defaultProps = {
             name: 'stranger'
@@ -658,7 +661,7 @@ render() {
             function MyFunctionalComponent() {
                 return <input /\>;
                 }
-                class Parent extends React.Component {
+            class Parent extends React.Component {
                 constructor(props) {
                     super(props);
                     this.textInput = React.createRef();
@@ -1333,9 +1336,9 @@ function withSubscription(WrappedComponent, selectData) {
         ```
         import hoistNonReactStatic from 'hoist-non-react-statics';
             function enhance(WrappedComponent) {
-            class Enhance extends React.Component {/*...*/}
-            hoistNonReactStatic(Enhance, WrappedComponent);
-            return Enhance;
+             	class Enhance extends React.Component {/*...*/}
+            	hoistNonReactStatic(Enhance, WrappedComponent);
+           		return Enhance;
         }
         ```
     -   2 另外一个解决方案就是分别导出组件自身的静态方法
